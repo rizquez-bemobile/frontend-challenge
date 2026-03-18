@@ -22,6 +22,9 @@ Frontend-Challenge/
 │   │   ├── Header
 │   │   │   ├── Header.module.css
 │   │   │   └── Header.tsx
+│   │   ├── Loading
+│   │   │   ├── Loading.module.css
+│   │   │   └── Loading.tsx
 │   │   └── SearchBar
 │   │       ├── SearchBar.module.css
 │   │       └── SearchBar.tsx
@@ -36,6 +39,7 @@ Frontend-Challenge/
 │   ├── types
 │   │   ├── BookCardProps.ts
 │   │   ├── BooksFoundProps.ts
+│   │   ├── LoadingProps.ts
 │   │   └── SearchBarProps.ts
 │   ├── utils
 │   │   └── getOpenLibraryCoverUrl.ts
