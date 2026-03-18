@@ -17,4 +17,5 @@
 .heart {
     color: var(--red);
     margin-right: 10px;
+    cursor: pointer;
 }
