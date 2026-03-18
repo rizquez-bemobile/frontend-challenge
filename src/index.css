@@ -1,0 +1,16 @@
+@import './assets/styles/reset.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --black: #000000;
+    --white: #FFFFFF;
+    --grey: #AAAAAA;
+    --red: #EC1D24;
+    --width-common: 80px;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    width: 100%;
+}
