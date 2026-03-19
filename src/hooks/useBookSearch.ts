@@ -6,6 +6,7 @@ import { openLibraryService } from "../services/openLibraryService"
 export const useBookSearch = () => {
     const [searchTerm, setSearchTerm] = useState('')
     const [books, setBooks] = useState<OpenLibraryBook[]>([])
+    const [isSearching, setIsSearching] = useState(false)
 
     const lastSearchedTerm = useRef('')
 
@@ -21,6 +22,8 @@ export const useBookSearch = () => {
         if (trimmedSearchTerm === lastSearchedTerm.current)
             return
 
+        setIsSearching(true)
+
         try {
             const response = await openLibraryService(trimmedSearchTerm)
             setBooks(response.docs ?? [])
@@ -28,6 +31,8 @@ export const useBookSearch = () => {
         } catch (error) {
             console.log(error) // TODO: Custom this!
             setBooks([])
+        } finally {
+            setIsSearching(false)
         }
     }
 
@@ -39,8 +44,9 @@ export const useBookSearch = () => {
     return {
         searchTerm,
         books,
+        isSearching,
         setSearchTerm,
         handleSearch,
-        handleKeyDown,
+        handleKeyDown
     }
 }

@@ -1,34 +1,45 @@
 import { BooksFound } from "../components/BooksFound/BooksFound"
+import { Loading } from "../components/Loading/Loading"
 import { SearchBar } from "../components/SearchBar/SearchBar"
-
 import { useBookSearch } from "../hooks/useBookSearch"
+import { useBooksReady } from "../hooks/useBooksReady"
 import { useFilteredBooks } from "../hooks/useFilteredBooks"
 
 function HomeView() {
     const {
         searchTerm,
         books,
+        isSearching,
         setSearchTerm,
         handleSearch,
-        handleKeyDown,
+        handleKeyDown
     } = useBookSearch()
 
     const {
-        filteredBooks,
-        results,
+        filteredBooks
     } = useFilteredBooks(books)
+
+    const {
+        isImagesReady,
+    } = useBooksReady(filteredBooks)
+
+    const shouldShowLoading = isSearching || !isImagesReady
 
     return (
         <>
             <SearchBar
                 searchTerm={searchTerm}
-                results={results}
+                results={filteredBooks.length}
                 setSearchTerm={setSearchTerm}
                 handleSearch={handleSearch}
                 handleKeyDown={handleKeyDown}
             />
 
-            <BooksFound books={filteredBooks} />
+            {
+                shouldShowLoading
+                ? <Loading />
+                : <BooksFound books={filteredBooks} />
+            }
         </>
     )
 }

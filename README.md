@@ -30,6 +30,7 @@ Frontend-Challenge/
 │   │       └── SearchBar.tsx
 │   ├── hooks
 │   │   ├── useBookSearch.ts
+│   │   ├── useBooksReady.ts
 │   │   └── useFilteredBooks.ts
 │   ├── interfaces
 │   │   ├── OpenLibraryBook.ts

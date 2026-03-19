@@ -13,7 +13,6 @@ export const useFilteredBooks = (books: OpenLibraryBook[]) => {
     }, [books])
 
     return {
-        filteredBooks,
-        results: filteredBooks.length,
+        filteredBooks
     }
 }
