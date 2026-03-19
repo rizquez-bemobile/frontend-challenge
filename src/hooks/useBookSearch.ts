@@ -29,7 +29,7 @@ export const useBookSearch = () => {
             setBooks(response.docs ?? [])
             lastSearchedTerm.current = trimmedSearchTerm
         } catch (error) {
-            console.log(error) // TODO: Custom this!
+            console.log(error) // TODO: Could a modal be created to display messages?
             setBooks([])
         } finally {
             setIsSearching(false)

@@ -29,7 +29,7 @@ function HomeView() {
         <>
             <SearchBar
                 searchTerm={searchTerm}
-                results={filteredBooks.length}
+                results={filteredBooks.length} // TODO: Should the results be a separate component?
                 setSearchTerm={setSearchTerm}
                 handleSearch={handleSearch}
                 handleKeyDown={handleKeyDown}
