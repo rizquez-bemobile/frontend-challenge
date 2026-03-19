@@ -1,13 +1,49 @@
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 
 import type { OpenLibraryBook } from '../interfaces/OpenLibraryBook'
 import { getOpenLibraryCoverUrl } from '../utils/getOpenLibraryCoverUrl'
 
-export const useBooksReady = (books: OpenLibraryBook[]) => { // TODO: It works, but it is not the right way to preload images
+const IMAGE_PRELOAD_TIMEOUT_MS = 3000
+
+export const useBooksReady = (books: OpenLibraryBook[]) => {
     const [isImagesReady, setIsImagesReady] = useState(false)
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         let cancelled = false
+
+        const preloadImage = (src: string) => {
+            return new Promise<void>((resolve) => {
+                const img = new Image()
+
+                const timeoutId = window.setTimeout(() => {
+                    cleanup()
+                    resolve()
+                }, IMAGE_PRELOAD_TIMEOUT_MS)
+
+                const cleanup = () => {
+                    window.clearTimeout(timeoutId)
+                    img.onload = null
+                    img.onerror = null
+                }
+
+                img.onload = () => {
+                    cleanup()
+                    resolve()
+                }
+
+                img.onerror = () => {
+                    cleanup()
+                    resolve()
+                }
+
+                img.src = src
+
+                if (img.complete) {
+                    cleanup()
+                    resolve()
+                }
+            })
+        }
 
         const preloadImages = async () => {
             if (books.length === 0) {
@@ -20,17 +56,10 @@ export const useBooksReady = (books: OpenLibraryBook[]) => { // TODO: It works, 
             const imagePromises = books.map((book) => {
                 const src = getOpenLibraryCoverUrl(book.cover_i)
 
-                return new Promise<void>((resolve) => {
-                    const img = new Image()
+                if (!src)
+                    return Promise.resolve()
 
-                    img.onload = () => resolve()
-                    img.onerror = () => resolve() // It does not freeze the entire UI if a splash screen fails
-
-                    img.src = src
-
-                    if (img.complete)
-                        resolve()
-                })
+                return preloadImage(src)
             })
 
             await Promise.all(imagePromises)
