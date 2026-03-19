@@ -26,6 +26,7 @@ function HomeView() {
         isLoadingCovers
     } = useBookCovers(filteredBooks)
 
+
     const [areCardsRendered, setAreCardsRendered] = useState(false)
 
     useEffect(() => {

@@ -28,6 +28,8 @@ Frontend-Challenge/
 │   │   └── SearchBar
 │   │       ├── SearchBar.module.css
 │   │       └── SearchBar.tsx
+│   ├── contexts
+│   │   └── FavoritesContext.ts
 │   ├── hooks
 │   │   ├── useBookCovers.ts
 │   │   ├── useBookSearch.ts
@@ -41,6 +43,7 @@ Frontend-Challenge/
 │   │   ├── BookCardProps.ts
 │   │   ├── BooksFoundProps.ts
 │   │   ├── CoversByBookKey.ts
+│   │   ├── FavoritesContextBooks.ts
 │   │   ├── LoadingProps.ts
 │   │   └── SearchBarProps.ts
 │   ├── utils
