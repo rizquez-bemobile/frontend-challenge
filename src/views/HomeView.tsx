@@ -1,8 +1,10 @@
+import { useEffect, useState } from "react"
+
 import { BooksFound } from "../components/BooksFound/BooksFound"
 import { Loading } from "../components/Loading/Loading"
 import { SearchBar } from "../components/SearchBar/SearchBar"
+import { useBookCovers } from "../hooks/useBookCovers"
 import { useBookSearch } from "../hooks/useBookSearch"
-import { useBooksReady } from "../hooks/useBooksReady"
 import { useFilteredBooks } from "../hooks/useFilteredBooks"
 
 function HomeView() {
@@ -20,10 +22,19 @@ function HomeView() {
     } = useFilteredBooks(books)
 
     const {
-        isImagesReady,
-    } = useBooksReady(filteredBooks)
+        coversByBookKey,
+        isLoadingCovers
+    } = useBookCovers(filteredBooks)
 
-    const shouldShowLoading = isSearching || !isImagesReady
+    const [areCardsRendered, setAreCardsRendered] = useState(false)
+
+    useEffect(() => {
+        setAreCardsRendered(false)
+    }, [filteredBooks, coversByBookKey])
+
+    const hasBooks = filteredBooks.length > 0
+
+    const shouldShowLoading = isSearching || isLoadingCovers || (hasBooks && !areCardsRendered)
 
     return (
         <>
@@ -37,8 +48,14 @@ function HomeView() {
 
             {
                 shouldShowLoading
-                ? <Loading />
-                : <BooksFound books={filteredBooks} />
+                    ? <Loading />
+                    : (
+                        <BooksFound
+                            books={filteredBooks}
+                            coversByBookKey={coversByBookKey}
+                            onRendered={() => setAreCardsRendered(true)}
+                        />
+                    )
             }
         </>
     )
