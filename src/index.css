@@ -1,17 +1,16 @@
-@import './assets/styles/reset.css';
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
 
-:root {
-    --black: #000000;
-    --white: #FFFFFF;
-    --grey: #AAAAAA;
-    --red: #EC1D24;
-    --grey-translucent: #efeff083;
-    --width-common: 80px;
+@theme {
+  --color-brand-red: #EC1D24;
+  --color-brand-grey: #AAAAAA;
+  --color-brand-black: #000000;
+  --color-brand-white: #FFFFFF;
+  --color-brand-grey-translucent: #efeff083;
+  --font-roboto: "Roboto", sans-serif;
+  --font-roboto-condensed: "Roboto Condensed", sans-serif;
 }
 
 body {
-    font-family: "Roboto", sans-serif;
-    width: 100%;
+  font-family: var(--font-roboto);
 }

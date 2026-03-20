@@ -1,6 +1,6 @@
-import { Header } from "./components/Header/Header"
-import { FavoritesProvider } from "./contexts/FavoritesContext"
-import HomeView from "./views/HomeView"
+import { FavoritesProvider } from "./app/context/FavoritesContext"
+import { Header } from "./ui/components/Header"
+import HomeView from "./ui/views/HomeView"
 
 function App() {
   return (

@@ -7,49 +7,45 @@ Frontend-Challenge/
 ├── public
 │   └── favicon.svg
 ├── src
+│   ├── api
+│   │   ├── contracts
+│   │   │   ├── OpenLibraryBook.ts
+│   │   │   └── OpenLibrarySearchResponse.ts
+│   │   ├── mappers
+│   │   │   └── mapOpenLibraryToBook.ts
+│   │   ├── openLibraryCoverUrl.ts
+│   │   └── openLibrarySearch.ts
+│   ├── app
+│   │   ├── context
+│   │   │   └── FavoritesContext.tsx
+│   │   └── hooks
+│   │       ├── useBookCovers.ts
+│   │       ├── useBookSearch.ts
+│   │       └── useFilteredBooks.ts
 │   ├── assets
-│   │   ├──images
-│   │   │  └── open-library.png
-│   │   └── styles
-│   │       └── reset.css
-│   ├── components
-│   │   ├── BookCard
-│   │   │   ├── BookCard.module.css
-│   │   │   └── BookCard.tsx
-│   │   ├── BooksFound
-│   │   │   ├── BooksFound.module.css
-│   │   │   └── BooksFound.tsx
-│   │   ├── Header
-│   │   │   ├── Header.module.css
-│   │   │   └── Header.tsx
-│   │   ├── Loading
-│   │   │   ├── Loading.module.css
-│   │   │   └── Loading.tsx
-│   │   └── SearchBar
-│   │       ├── SearchBar.module.css
-│   │       └── SearchBar.tsx
-│   ├── contexts
-│   │   └── FavoritesContext.ts
-│   ├── hooks
-│   │   ├── useBookCovers.ts
-│   │   ├── useBookSearch.ts
-│   │   └── useFilteredBooks.ts
-│   ├── interfaces
-│   │   ├── OpenLibraryBook.ts
-│   │   └── OpenLibrarySearchResponse.ts
-│   ├── services
-│   │   └── openLibraryService.ts
-│   ├── types
-│   │   ├── BookCardProps.ts
-│   │   ├── BooksFoundProps.ts
-│   │   ├── CoversByBookKey.ts
-│   │   ├── FavoritesContextBooks.ts
-│   │   ├── LoadingProps.ts
-│   │   └── SearchBarProps.ts
-│   ├── utils
-│   │   └── getOpenLibraryCoverUrl.ts
-│   ├── views
-│   │   └── HomeView.tsx
+│   │   └── open-library.png
+│   ├── domain
+│   │   ├── models
+│   │   │   ├── Book.ts
+│   │   │   └── Books.ts
+│   │   └── types
+│   │       ├── BookCardProps.ts
+│   │       ├── BooksFoundProps.ts
+│   │       ├── CoversByBookKey.ts
+│   │       ├── FavoritesContextBooks.ts
+│   │       ├── LoadingProps.ts
+│   │       └── SearchBarProps.ts
+│   ├── shared
+│   │   └── constants.ts
+│   ├── ui
+│   │   ├── components
+│   │   │   ├── BookCard.tsx
+│   │   │   ├── BooksFound.tsx
+│   │   │   ├── Header.tsx
+│   │   │   ├── Loading.tsx
+│   │   │   └── SearchBar.tsx
+│   │   └── views
+│   │       └── HomeView.tsx
 │   ├── App.tsx
 │   ├── index.css
 │   └── main.tsx
