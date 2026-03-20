@@ -34,7 +34,9 @@ Frontend-Challenge/
 │   │       ├── CoversByBookKey.ts
 │   │       ├── FavoritesContextBooks.ts
 │   │       ├── LoadingProps.ts
-│   │       └── SearchBarProps.ts
+│   │       ├── SearchBarProps.ts
+│   │       ├── SearchState.ts
+│   │       └── UseBookSearchOptions.ts
 │   ├── shared
 │   │   └── constants.ts
 │   ├── ui

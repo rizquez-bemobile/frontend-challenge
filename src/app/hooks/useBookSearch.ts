@@ -2,13 +2,14 @@ import { useRef, useState } from "react"
 
 import { openLibrarySearch } from "../../api/openLibrarySearch"
 import type { Book } from "../../domain/models/Book"
+import type { UseBookSearchOptions } from "../../domain/types/UseBookSearchOptions"
 
-export const useBookSearch = () => {
-    const [searchTerm, setSearchTerm] = useState('')
-    const [books, setBooks] = useState<Book[]>([])
+export const useBookSearch = ({ initialSearchState = null, persistSearchState }: UseBookSearchOptions = {}) => {
+    const [searchTerm, setSearchTerm] = useState(() => initialSearchState?.searchTerm ?? '')
+    const [books, setBooks] = useState<Book[]>(() => initialSearchState?.books ?? [])
     const [isSearching, setIsSearching] = useState(false)
 
-    const lastSearchedTerm = useRef('')
+    const lastSearchedTerm = useRef(initialSearchState?.searchTerm ?? '')
 
     const handleSearch = async () => {
         const trimmedSearchTerm = searchTerm.trim()
@@ -16,6 +17,12 @@ export const useBookSearch = () => {
         if (!trimmedSearchTerm) {
             setBooks([])
             lastSearchedTerm.current = ''
+
+            persistSearchState?.({
+                searchTerm: '',
+                books: []
+            })
+
             return
         }
 
@@ -26,11 +33,23 @@ export const useBookSearch = () => {
 
         try {
             const response = await openLibrarySearch(trimmedSearchTerm)
-            setBooks(response ?? [])
+            const nextBooks = response ?? []
+
+            setBooks(nextBooks)
             lastSearchedTerm.current = trimmedSearchTerm
+
+            persistSearchState?.({
+                searchTerm: trimmedSearchTerm,
+                books: nextBooks
+            })
         } catch (error) {
-            console.log(error) // TODO: Could a modal be created to display messages?
+            console.log(error)
             setBooks([])
+
+            persistSearchState?.({
+                searchTerm: trimmedSearchTerm,
+                books: []
+            })
         } finally {
             setIsSearching(false)
         }

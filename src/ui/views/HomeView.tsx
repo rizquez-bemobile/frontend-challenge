@@ -1,3 +1,5 @@
+import { useLocation, useNavigate } from "react-router-dom"
+
 import { SearchBar } from "../components/SearchBar"
 import { Loading } from "../components/Loading"
 import { BooksFound } from "../components/BooksFound"
@@ -5,8 +7,14 @@ import { useBookCovers } from "../../app/hooks/useBookCovers"
 import { useBookSearch } from "../../app/hooks/useBookSearch"
 import { useFilteredBooks } from "../../app/hooks/useFilteredBooks"
 import lookingforabook from '@/assets/looking-for-a-book.jpg'
+import type { SearchState } from "../../domain/types/SearchState"
 
 function HomeView() {
+    const location = useLocation()
+    const navigate = useNavigate()
+
+    const savedSearchState = (location.state as SearchState | null) ?? null
+
     const {
         searchTerm,
         books,
@@ -14,7 +22,15 @@ function HomeView() {
         setSearchTerm,
         handleSearch,
         handleKeyDown
-    } = useBookSearch()
+    } = useBookSearch({
+        initialSearchState: savedSearchState,
+        persistSearchState: (nextState) => {
+            navigate('.', {
+                replace: true,
+                state: nextState
+            })
+        }
+    })
 
     const { filteredBooks } = useFilteredBooks(books)
 
