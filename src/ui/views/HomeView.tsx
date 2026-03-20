@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
-import { useBookCovers } from "../../app/hooks/useBookCovers"
-import { useBookSearch } from "../../app/hooks/useBookSearch"
-import { useFilteredBooks } from "../../app/hooks/useFilteredBooks"
 import { SearchBar } from "../components/SearchBar"
 import { Loading } from "../components/Loading"
 import { BooksFound } from "../components/BooksFound"
+import { useBookCovers } from "../../app/hooks/useBookCovers"
+import { useBookSearch } from "../../app/hooks/useBookSearch"
+import { useFilteredBooks } from "../../app/hooks/useFilteredBooks"
+import lookingforabook from '@/assets/looking-for-a-book.jpg'
 
 function HomeView() {
     const {
@@ -16,47 +16,36 @@ function HomeView() {
         handleKeyDown
     } = useBookSearch()
 
-    const {
-        filteredBooks
-    } = useFilteredBooks(books)
+    const { filteredBooks } = useFilteredBooks(books)
 
     const {
         coversByBookId,
         isLoadingCovers
     } = useBookCovers(filteredBooks)
 
-
-    const [areCardsRendered, setAreCardsRendered] = useState(false)
-
-    useEffect(() => {
-        setAreCardsRendered(false)
-    }, [filteredBooks, coversByBookId])
-
+    const isLoading = isSearching || isLoadingCovers
     const hasBooks = filteredBooks.length > 0
-
-    const shouldShowLoading = isSearching || isLoadingCovers || (hasBooks && !areCardsRendered)
 
     return (
         <>
             <SearchBar
                 searchTerm={searchTerm}
-                results={filteredBooks.length} // TODO: Should the results be a separate component?
+                results={filteredBooks.length}
                 setSearchTerm={setSearchTerm}
                 handleSearch={handleSearch}
                 handleKeyDown={handleKeyDown}
             />
 
-            {
-                shouldShowLoading
-                    ? <Loading />
-                    : (
-                        <BooksFound
-                            books={filteredBooks}
-                            coversByBookId={coversByBookId}
-                            onRendered={() => setAreCardsRendered(true)}
-                        />
-                    )
-            }
+            {isLoading ? (
+                <Loading />
+            ) : hasBooks ? (
+                <BooksFound
+                    books={filteredBooks}
+                    coversByBookId={coversByBookId}
+                />
+            ) : (
+                <img src={lookingforabook} alt="Looking for a book" className="mx-auto" />
+            )}
         </>
     )
 }

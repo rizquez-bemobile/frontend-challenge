@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons"
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons"
@@ -12,28 +13,30 @@ export const BookCard = ({ book, coverUrl }: BookCardProps) => {
 
     return (
         <article className="flex flex-col justify-between overflow-hidden bg-brand-black [clip-path:polygon(0_0,100%_0,100%_95%,90%_100%,0_100%)]">
-            <div className="w-full overflow-hidden border-b-[5px] border-brand-red aspect-[1/1.35]">
-                {
-                    coverUrl
-                        ? (
-                            <img
-                                src={coverUrl}
-                                alt={book.title}
-                                className="block h-full w-full object-cover"
-                            />
-                        )
-                        : (
-                            <div className="flex flex-col gap-2.5 p-2.5">
-                                <p className="truncate text-sm font-normal text-brand-white">
-                                    Title: {book.title}
-                                </p>
-                                <p className="truncate text-sm font-normal text-brand-white">
-                                    No cover page
-                                </p>
-                            </div>
-                        )
-                }
-            </div>
+            <Link to={`/book/${book.title}`}>
+                <div className="w-full overflow-hidden border-b-[5px] border-brand-red aspect-[1/1.35]">
+                    {
+                        coverUrl
+                            ? (
+                                <img
+                                    src={coverUrl}
+                                    alt={book.title}
+                                    className="block h-full w-full object-cover"
+                                />
+                            )
+                            : (
+                                <div className="flex flex-col gap-2.5 p-2.5">
+                                    <p className="truncate text-sm font-normal text-brand-white">
+                                        Title: {book.title}
+                                    </p>
+                                    <p className="truncate text-sm font-normal text-brand-white">
+                                        No cover page
+                                    </p>
+                                </div>
+                            )
+                    }
+                </div>
+            </Link>
 
             <div className="flex items-center justify-between gap-2.5 p-2.5">
                 <div className="flex min-w-0 flex-1 flex-col gap-2.5">

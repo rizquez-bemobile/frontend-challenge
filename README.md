@@ -23,11 +23,11 @@ Frontend-Challenge/
 │   │       ├── useBookSearch.ts
 │   │       └── useFilteredBooks.ts
 │   ├── assets
+│   │   ├── looking-for-a-book.jpg
 │   │   └── open-library.png
 │   ├── domain
 │   │   ├── models
-│   │   │   ├── Book.ts
-│   │   │   └── Books.ts
+│   │   │   └── Book.ts
 │   │   └── types
 │   │       ├── BookCardProps.ts
 │   │       ├── BooksFoundProps.ts
@@ -45,6 +45,7 @@ Frontend-Challenge/
 │   │   │   ├── Loading.tsx
 │   │   │   └── SearchBar.tsx
 │   │   └── views
+│   │       ├── BookDetailView.tsx
 │   │       └── HomeView.tsx
 │   ├── App.tsx
 │   ├── index.css

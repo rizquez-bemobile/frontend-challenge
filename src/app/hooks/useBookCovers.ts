@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useLayoutEffect, useState } from "react"
 
 import type { CoversByBookId } from "../../domain/types/CoversByBookId"
 import { openLibraryCoverUrl } from "../../api/openLibraryCoverUrl"
@@ -8,7 +8,7 @@ export const useBookCovers = (books: Book[]) => {
     const [coversByBookId, setCoversByBookId] = useState<CoversByBookId>({})
     const [isLoadingCovers, setIsLoadingCovers] = useState(false)
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         let isCancelled = false
 
         const preloadCovers = async () => {
