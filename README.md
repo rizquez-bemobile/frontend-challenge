@@ -42,6 +42,7 @@ Frontend-Challenge/
 │   │       ├── FavoritesContextBooks.ts
 │   │       ├── LoadingProps.ts
 │   │       ├── SearchBarProps.ts
+│   │       ├── SearchLayoutContext.ts
 │   │       ├── SearchState.ts
 │   │       └── UseBookSearchOptions.ts
 │   ├── shared
@@ -54,8 +55,11 @@ Frontend-Challenge/
 │   │   │   ├── Header.tsx
 │   │   │   ├── Loading.tsx
 │   │   │   └── SearchBar.tsx
+│   │   ├── layouts
+│   │   │   └── SearchLayout.tsx
 │   │   └── views
 │   │       ├── BookDetailView.tsx
+│   │       ├── BookResultsView.tsx
 │   │       ├── FavoriteBooksView.tsx
 │   │       └── HomeView.tsx
 │   ├── App.tsx
