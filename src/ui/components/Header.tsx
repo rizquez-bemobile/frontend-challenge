@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart } from "@fortawesome/free-solid-svg-icons"
 
@@ -6,6 +7,13 @@ import openlibrarypng from "@/assets/open-library.png"
 
 export const Header = () => {
     const { favorites } = useFavorites()
+    const navigate = useNavigate()
+
+    const handleGoToFavorites = () => {
+        if (favorites.size > 0) {
+            navigate("/book/favorites")
+        }
+    }
 
     return (
         <header className="flex justify-between bg-brand-black px-20 py-5 text-brand-white">
@@ -14,13 +22,17 @@ export const Header = () => {
                 alt="Open Library Image"
                 className="w-32.5"
             />
-            <span className="self-center">
+            <button type="button"
+                onClick={handleGoToFavorites}
+                disabled={favorites.size === 0}
+                className={`self-center ${favorites.size > 0 ? "cursor-pointer" : "cursor-not-allowed"}`}
+            >
                 <FontAwesomeIcon
                     icon={faHeart}
                     className="mr-2.5 cursor-pointer text-brand-red"
                 />
                 {favorites.size}
-            </span>
+            </button>
         </header>
     )
 }

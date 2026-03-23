@@ -56,6 +56,7 @@ Frontend-Challenge/
 │   │   │   └── SearchBar.tsx
 │   │   └── views
 │   │       ├── BookDetailView.tsx
+│   │       ├── FavoriteBooksView.tsx
 │   │       └── HomeView.tsx
 │   ├── App.tsx
 │   ├── index.css

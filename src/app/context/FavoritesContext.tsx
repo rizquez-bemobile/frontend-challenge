@@ -1,20 +1,21 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useMemo, useState } from "react"
 
 import type { FavoritesContextBooks } from "../../domain/types/FavoritesContextBooks"
+import type { Book } from "../../domain/models/Book"
 
 const FavoritesContext = createContext<FavoritesContextBooks | null>(null)
 
 export const FavoritesProvider = ({ children }: { children: React.ReactNode }) => {
-    const [favorites, setFavorites] = useState<Set<string>>(new Set())
+    const [favorites, setFavorites] = useState<Map<string, Book>>(new Map())
 
-    const toggleFavorite = (bookWork: string) => {
+    const toggleFavorite = (book: Book) => {
         setFavorites((previous) => {
-            const saved = new Set(previous)
+            const saved = new Map(previous)
 
-            if (saved.has(bookWork))
-                saved.delete(bookWork)
+            if (saved.has(book.work))
+                saved.delete(book.work)
             else
-                saved.add(bookWork)
+                saved.set(book.work, book)
 
             return saved
         })
@@ -25,11 +26,15 @@ export const FavoritesProvider = ({ children }: { children: React.ReactNode }) =
     }
 
     const clearFavorites = () => {
-        setFavorites(new Set())
+        setFavorites(new Map())
     }
 
+    const favoriteBooks = useMemo(() => {
+        return Array.from(favorites.values())
+    }, [favorites])
+
     return (
-        <FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite, clearFavorites }}>
+        <FavoritesContext.Provider value={{ favorites, favoriteBooks, toggleFavorite, isFavorite, clearFavorites }}>
             {children}
         </FavoritesContext.Provider>
     )

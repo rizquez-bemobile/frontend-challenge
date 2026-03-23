@@ -62,7 +62,7 @@ export const BookCard = ({ book, coverUrl }: BookCardProps) => {
                     className={`relative z-10 shrink-0 cursor-pointer text-base ${
                         favorite ? 'text-brand-red group-hover:text-brand-white transition-colors duration-500' : 'text-brand-white'
                     }`}
-                    onClick={() => toggleFavorite(book.work)}
+                    onClick={() => toggleFavorite(book)}
                 />
             </div>
         </article>

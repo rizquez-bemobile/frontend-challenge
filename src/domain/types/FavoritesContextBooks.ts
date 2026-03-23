@@ -1,6 +1,9 @@
+import type { Book } from "../models/Book"
+
 export type FavoritesContextBooks = {
-    favorites: Set<string>
-    toggleFavorite: (bookWork: string) => void
+    favorites: Map<string, Book>
+    favoriteBooks: Book[]
+    toggleFavorite: (book: Book) => void
     isFavorite: (bookWork: string) => boolean
     clearFavorites: () => void
 }
