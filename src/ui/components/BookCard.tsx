@@ -9,11 +9,18 @@ import type { BookCardProps } from "../../domain/types/BookCardProps"
 export const BookCard = ({ book, coverUrl }: BookCardProps) => {
     const authors = book.authors?.join(', ')
     const { toggleFavorite, isFavorite } = useFavorites()
-    const favorite = isFavorite(book.id)
+    const favorite = isFavorite(book.work)
 
     return (
         <article className="flex flex-col justify-between overflow-hidden bg-brand-black [clip-path:polygon(0_0,100%_0,100%_95%,90%_100%,0_100%)]">
-            <Link to={`/book/${book.title}`}>
+            <Link 
+                to={`/book/${book.title}`}
+                state={{
+                    work: book.work,
+                    title: book.title,
+                    coverUrl
+                }}
+            >
                 <div className="w-full overflow-hidden border-b-[5px] border-brand-red aspect-[1/1.35]">
                     {
                         coverUrl
@@ -53,7 +60,7 @@ export const BookCard = ({ book, coverUrl }: BookCardProps) => {
                     className={`shrink-0 cursor-pointer text-base transition-colors duration-200 ${
                         favorite ? 'text-brand-red' : 'text-brand-white'
                     }`}
-                    onClick={() => toggleFavorite(book.id)}
+                    onClick={() => toggleFavorite(book.work)}
                 />
             </div>
         </article>

@@ -1,0 +1,1 @@
+export type CoversByBookWork = Record<string, string>

@@ -3,16 +3,16 @@ import { useLayoutEffect } from "react"
 import type { BooksFoundProps } from "../../domain/types/BooksFoundProps"
 import { BookCard } from "./BookCard"
 
-export const BooksFound = ({ books, coversByBookId, onRendered }: BooksFoundProps) => {
+export const BooksFound = ({ books, coversByBookWork, onRendered }: BooksFoundProps) => {
     useLayoutEffect(() => {
         onRendered?.()
-    }, [books, coversByBookId, onRendered])
+    }, [books, coversByBookWork, onRendered])
 
     const renderedBooks = books.map((book) => (
         <BookCard
-            key={book.id}
+            key={book.work}
             book={book}
-            coverUrl={coversByBookId[book.id]}
+            coverUrl={coversByBookWork[book.work]}
         />
     ))
 

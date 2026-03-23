@@ -1,5 +1,5 @@
 export interface Book { // TODO: Parameters cannot be undefined!
-  id: string
+  work: string
   title?: string
   authors?: string[]
   firstPublishedYear?: number

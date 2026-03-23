@@ -4,7 +4,7 @@ import { openLibrarySearch } from "../../api/openLibrarySearch"
 import type { Book } from "../../domain/models/Book"
 import type { UseBookSearchOptions } from "../../domain/types/UseBookSearchOptions"
 
-export const useBookSearch = ({ initialSearchState = null, persistSearchState }: UseBookSearchOptions = {}) => {
+export const useBookSearch = ({ initialSearchState = null, persistSearchState }: UseBookSearchOptions = {}) => { // TODO: It is necessary to handle errors
     const [searchTerm, setSearchTerm] = useState(() => initialSearchState?.searchTerm ?? '')
     const [books, setBooks] = useState<Book[]>(() => initialSearchState?.books ?? [])
     const [isSearching, setIsSearching] = useState(false)

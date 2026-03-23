@@ -1,5 +1,5 @@
 export type FavoritesContextBooks = {
     favorites: Set<string>
-    toggleFavorite: (bookKey: string) => void
-    isFavorite: (bookKey: string) => boolean
+    toggleFavorite: (bookWork: string) => void
+    isFavorite: (bookWork: string) => boolean
 }

@@ -3,7 +3,7 @@ import type { OpenLibraryBook } from "../contracts/OpenLibraryBook"
 
 export const mapOpenLibraryToBook = (dto: OpenLibraryBook): Book => {
   return {
-    id: dto.key,
+    work: dto.key,
     title: dto.title,
     authors: dto.author_name,
     firstPublishedYear: dto.first_publish_year,

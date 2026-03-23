@@ -7,21 +7,21 @@ const FavoritesContext = createContext<FavoritesContextBooks | null>(null)
 export const FavoritesProvider = ({ children }: { children: React.ReactNode }) => {
     const [favorites, setFavorites] = useState<Set<string>>(new Set())
 
-    const toggleFavorite = (bookKey: string) => {
+    const toggleFavorite = (bookWork: string) => {
         setFavorites((previous) => {
             const saved = new Set(previous)
 
-            if (saved.has(bookKey))
-                saved.delete(bookKey)
+            if (saved.has(bookWork))
+                saved.delete(bookWork)
             else
-                saved.add(bookKey)
+                saved.add(bookWork)
 
             return saved
         })
     }
 
-    const isFavorite = (bookKey: string) => {
-        return favorites.has(bookKey)
+    const isFavorite = (bookWork: string) => {
+        return favorites.has(bookWork)
     }
 
     return (

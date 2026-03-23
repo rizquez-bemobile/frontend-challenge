@@ -1,11 +1,11 @@
 import { useLayoutEffect, useState } from "react"
 
-import type { CoversByBookId } from "../../domain/types/CoversByBookId"
+import type { CoversByBookWork } from "../../domain/types/CoversByBookWork"
 import { openLibraryCoverUrl } from "../../api/openLibraryCoverUrl"
 import type { Book } from "../../domain/models/Book"
 
 export const useBookCovers = (books: Book[]) => {
-    const [coversByBookId, setCoversByBookId] = useState<CoversByBookId>({})
+    const [coversByBookWork, setCoversByBookWork] = useState<CoversByBookWork>({})
     const [isLoadingCovers, setIsLoadingCovers] = useState(false)
 
     useLayoutEffect(() => {
@@ -13,21 +13,21 @@ export const useBookCovers = (books: Book[]) => {
 
         const preloadCovers = async () => {
             if (!books.length) {
-                setCoversByBookId({})
+                setCoversByBookWork({})
                 setIsLoadingCovers(false)
                 return
             }
 
             setIsLoadingCovers(true)
 
-            const nextCovers: CoversByBookId = {}
+            const nextCovers: CoversByBookWork = {}
 
             const coverPromises = books.map((book) => {
                 return new Promise<void>((resolve) => {
                     const coverUrl = openLibraryCoverUrl(book.coverId)
 
                     if (!coverUrl) {
-                        nextCovers[book.id] = ''
+                        nextCovers[book.work] = ''
                         resolve()
                         return
                     }
@@ -35,12 +35,12 @@ export const useBookCovers = (books: Book[]) => {
                     const image = new Image()
 
                     image.onload = () => {
-                        nextCovers[book.id] = coverUrl
+                        nextCovers[book.work] = coverUrl
                         resolve()
                     }
 
                     image.onerror = () => {
-                        nextCovers[book.id] = ''
+                        nextCovers[book.work] = ''
                         resolve()
                     }
 
@@ -53,7 +53,7 @@ export const useBookCovers = (books: Book[]) => {
             if (isCancelled)
                 return
 
-            setCoversByBookId(nextCovers)
+            setCoversByBookWork(nextCovers)
             setIsLoadingCovers(false)
         }
 
@@ -65,7 +65,7 @@ export const useBookCovers = (books: Book[]) => {
     }, [books])
 
     return {
-        coversByBookId,
+        coversByBookWork,
         isLoadingCovers
     }
 }

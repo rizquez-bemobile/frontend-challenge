@@ -35,7 +35,7 @@ function HomeView() {
     const { filteredBooks } = useFilteredBooks(books)
 
     const {
-        coversByBookId,
+        coversByBookWork,
         isLoadingCovers
     } = useBookCovers(filteredBooks)
 
@@ -57,7 +57,7 @@ function HomeView() {
             ) : hasBooks ? (
                 <BooksFound
                     books={filteredBooks}
-                    coversByBookId={coversByBookId}
+                    coversByBookWork={coversByBookWork}
                 />
             ) : (
                 <img src={lookingforabook} alt="Looking for a book" className="mx-auto" />

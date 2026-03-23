@@ -10,10 +10,13 @@ Frontend-Challenge/
 │   ├── api
 │   │   ├── contracts
 │   │   │   ├── OpenLibraryBook.ts
-│   │   │   └── OpenLibrarySearchResponse.ts
+│   │   │   ├── OpenLibrarySearchResponse.ts
+│   │   │   └── OpenLibraryWork.ts
 │   │   ├── mappers
-│   │   │   └── mapOpenLibraryToBook.ts
+│   │   │   ├── mapOpenLibraryToBook.ts
+│   │   │   └── mapOpenLibraryToDetails.ts
 │   │   ├── openLibraryCoverUrl.ts
+│   │   ├── openLibraryDetails.ts
 │   │   └── openLibrarySearch.ts
 │   ├── app
 │   │   ├── context
@@ -21,17 +24,21 @@ Frontend-Challenge/
 │   │   └── hooks
 │   │       ├── useBookCovers.ts
 │   │       ├── useBookSearch.ts
+│   │       ├── useDetailsSearch.ts
 │   │       └── useFilteredBooks.ts
 │   ├── assets
 │   │   ├── looking-for-a-book.jpg
 │   │   └── open-library.png
 │   ├── domain
 │   │   ├── models
-│   │   │   └── Book.ts
+│   │   │   ├── Book.ts
+│   │   │   └── Details.ts
 │   │   └── types
 │   │       ├── BookCardProps.ts
+│   │       ├── BookLocationState.ts
 │   │       ├── BooksFoundProps.ts
-│   │       ├── CoversByBookKey.ts
+│   │       ├── BookSummaryProps.ts
+│   │       ├── CoversByBookWork.ts
 │   │       ├── FavoritesContextBooks.ts
 │   │       ├── LoadingProps.ts
 │   │       ├── SearchBarProps.ts
@@ -43,6 +50,7 @@ Frontend-Challenge/
 │   │   ├── components
 │   │   │   ├── BookCard.tsx
 │   │   │   ├── BooksFound.tsx
+│   │   │   ├── BooksSummary.tsx
 │   │   │   ├── Header.tsx
 │   │   │   ├── Loading.tsx
 │   │   │   └── SearchBar.tsx
