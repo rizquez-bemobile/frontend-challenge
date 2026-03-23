@@ -16,8 +16,7 @@ export const BookCard = ({ book, coverUrl }: BookCardProps) => {
             <Link 
                 to={`/book/${book.title}`}
                 state={{
-                    work: book.work,
-                    title: book.title,
+                    book,
                     coverUrl
                 }}
             >

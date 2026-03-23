@@ -5,34 +5,33 @@ import type { BookLocationState } from "../../domain/types/BookLocationState"
 import { BookSummary } from "../components/BookSummary"
 import { useDetailsSearch } from "../../app/hooks/useDetailsSearch"
 import { Loading } from "../components/Loading"
+import type { Book } from "../../domain/models/Book"
 
 function BookDetailView() {
     const location = useLocation()
     const state = (location.state as BookLocationState | null) ?? null
 
-    const work = state?.work ?? ''
-    const title = state?.title ?? ''
-    const coverUrl = state?.coverUrl ?? ''
+    const book = state?.book as Book
+    const coverUrl = state?.coverUrl as string
 
     const {
         details,
         isSearchingDetails,
         handleSearchDetails
-    } = useDetailsSearch(work)
+    } = useDetailsSearch(book.work)
 
     useEffect(() => {
-        if (!work) 
+        if (!book.work) 
             return
         
         handleSearchDetails()
-    }, [work])
+    }, [book.work])
 
     return isSearchingDetails ? (
         <Loading />
     ) : (
         <BookSummary
-            work={work}
-            title={title}
+            book={book}
             coverUrl={coverUrl}
             details={details}
         />

@@ -1,8 +1,8 @@
+import type { Book } from "../models/Book"
 import type { Details } from "../models/Details"
 
 export type BookSummaryProps = {
-    work: string
-    title: string
+    book: Book
     coverUrl: string
     details: Details | null
 }

@@ -1,5 +1,6 @@
+import type { Book } from "../models/Book"
+
 export type BookLocationState = {
-    work: string
-    title?: string
+    book: Book
     coverUrl?: string
 }
