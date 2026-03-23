@@ -12,7 +12,7 @@ export const BookCard = ({ book, coverUrl }: BookCardProps) => {
     const favorite = isFavorite(book.work)
 
     return (
-        <article className="flex flex-col justify-between overflow-hidden bg-brand-black [clip-path:polygon(0_0,100%_0,100%_95%,90%_100%,0_100%)]">
+        <article className="group flex flex-col justify-between overflow-hidden bg-brand-black [clip-path:polygon(0_0,100%_0,100%_95%,90%_100%,0_100%)]">
             <Link 
                 to={`/book/${book.title}`}
                 state={{
@@ -45,8 +45,10 @@ export const BookCard = ({ book, coverUrl }: BookCardProps) => {
                 </div>
             </Link>
 
-            <div className="flex items-center justify-between gap-2.5 p-2.5">
-                <div className="flex min-w-0 flex-1 flex-col gap-2.5">
+            <div className="relative flex items-center justify-between gap-2.5 p-2.5 overflow-hidden">
+                <div className="absolute inset-0 bg-brand-red -translate-y-full transition-transform duration-500 group-hover:translate-y-0" />
+                
+                <div className="relative z-10 flex min-w-0 flex-1 flex-col gap-2.5">
                     <p className="truncate text-sm font-normal text-brand-white">
                         Published in {book.firstPublishedYear}
                     </p>
@@ -57,8 +59,8 @@ export const BookCard = ({ book, coverUrl }: BookCardProps) => {
 
                 <FontAwesomeIcon
                     icon={favorite ? solidHeart : regularHeart}
-                    className={`shrink-0 cursor-pointer text-base transition-colors duration-200 ${
-                        favorite ? 'text-brand-red' : 'text-brand-white'
+                    className={`relative z-10 shrink-0 cursor-pointer text-base ${
+                        favorite ? 'text-brand-red group-hover:text-brand-white transition-colors duration-500' : 'text-brand-white'
                     }`}
                     onClick={() => toggleFavorite(book.work)}
                 />
