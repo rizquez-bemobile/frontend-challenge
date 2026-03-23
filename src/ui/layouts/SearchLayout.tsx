@@ -5,12 +5,16 @@ import { useBookSearch } from "../../app/hooks/useBookSearch"
 import type { SearchState } from "../../domain/types/SearchState"
 import { useFilteredBooks } from "../../app/hooks/useFilteredBooks"
 import { useBookCovers } from "../../app/hooks/useBookCovers"
+import { useFavorites } from "../../app/context/FavoritesContext"
 
 function SearchLayout() { // TODO: The loading modal takes a while to appear
   const location = useLocation()
   const navigate = useNavigate()
+  const { favoriteBooks } = useFavorites()
 
   const savedSearchState = (location.state as SearchState | null) ?? null
+
+  const showFavoritesTitle = location.pathname === "/book/favorites"
 
   const {
     searchTerm,
@@ -38,9 +42,11 @@ function SearchLayout() { // TODO: The loading modal takes a while to appear
 
   return (
     <>
+      {showFavoritesTitle && (<h1 className="text-3xl font-bold text-brand-black uppercase px-20 pt-12.5">Favorites</h1>)}
+
       <SearchBar
         searchTerm={searchTerm}
-        results={filteredBooks.length}
+        results={showFavoritesTitle ? favoriteBooks.length : filteredBooks.length}
         setSearchTerm={setSearchTerm}
         handleSearch={handleSearch}
         handleKeyDown={handleKeyDown}

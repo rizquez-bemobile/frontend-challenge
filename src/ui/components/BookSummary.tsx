@@ -10,10 +10,10 @@ export const BookSummary = ({ book, coverUrl, details }: BookSummaryProps) => {
     const favorite = isFavorite(book.work)
 
     return (
-        <section className="bg-brand-black">
-            <summary className="ml-60 mr-60 flex gap-10">
-                {coverUrl && <img className="w-full max-w-62.5 h-auto object-cover" src={coverUrl} alt={book.title} />}
-                <section className="flex flex-1 flex-col gap-5">
+        <section className="bg-brand-black [clip-path:polygon(0_0,100%_0,100%_87%,97%_100%,0_100%)] max-[600px]:[clip-path:polygon(0_0,100%_0,100%_95%,92%_100%,0_100%)]">
+            <summary className="flex gap-10 min-[1400px]:mx-60 max-[600px]:flex-col max-[600px]:gap-4">
+                {coverUrl && <img className="w-full max-w-62.5 h-auto object-cover max-[600px]:max-w-full" src={coverUrl} alt={book.title} />}
+                <section className="flex flex-1 flex-col gap-5 max-[1400px]:pr-20 max-[600px]:px-3 max-[600px]:pb-4">
                     <div className="flex justify-between">
                         <h1 className="text-brand-white font-bold text-5xl">{book.title}</h1>
                         <FontAwesomeIcon
