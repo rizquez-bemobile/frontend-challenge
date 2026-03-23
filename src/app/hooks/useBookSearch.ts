@@ -3,11 +3,13 @@ import { useRef, useState } from "react"
 import { openLibrarySearch } from "../../api/openLibrarySearch"
 import type { Book } from "../../domain/models/Book"
 import type { UseBookSearchOptions } from "../../domain/types/UseBookSearchOptions"
+import { useFavorites } from "../context/FavoritesContext"
 
 export const useBookSearch = ({ initialSearchState = null, persistSearchState }: UseBookSearchOptions = {}) => { // TODO: It is necessary to handle errors
     const [searchTerm, setSearchTerm] = useState(() => initialSearchState?.searchTerm ?? '')
     const [books, setBooks] = useState<Book[]>(() => initialSearchState?.books ?? [])
     const [isSearching, setIsSearching] = useState(false)
+    const { clearFavorites } = useFavorites()
 
     const lastSearchedTerm = useRef(initialSearchState?.searchTerm ?? '')
 
@@ -17,6 +19,7 @@ export const useBookSearch = ({ initialSearchState = null, persistSearchState }:
         if (!trimmedSearchTerm) {
             setBooks([])
             lastSearchedTerm.current = ''
+            clearFavorites()
 
             persistSearchState?.({
                 searchTerm: '',
@@ -52,6 +55,7 @@ export const useBookSearch = ({ initialSearchState = null, persistSearchState }:
             })
         } finally {
             setIsSearching(false)
+            clearFavorites()
         }
     }
 

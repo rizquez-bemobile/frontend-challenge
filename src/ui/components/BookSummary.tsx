@@ -13,7 +13,7 @@ export const BookSummary = ({ work, title, coverUrl, details }: BookSummaryProps
         <section className="bg-brand-black">
             <summary className="ml-60 mr-60 flex gap-10">
                 {coverUrl && <img className="w-full max-w-62.5 h-auto object-cover" src={coverUrl} alt={title} />}
-                <section className="flex flex-col gap-5">
+                <section className="flex flex-1 flex-col gap-5">
                     <div className="flex justify-between">
                         <h1 className="text-brand-white font-bold text-5xl">{title}</h1>
                         <FontAwesomeIcon

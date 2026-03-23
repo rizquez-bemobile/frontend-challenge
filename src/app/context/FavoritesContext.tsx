@@ -24,8 +24,12 @@ export const FavoritesProvider = ({ children }: { children: React.ReactNode }) =
         return favorites.has(bookWork)
     }
 
+    const clearFavorites = () => {
+        setFavorites(new Set())
+    }
+
     return (
-        <FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite }}>
+        <FavoritesContext.Provider value={{ favorites, toggleFavorite, isFavorite, clearFavorites }}>
             {children}
         </FavoritesContext.Provider>
     )
