@@ -7,7 +7,7 @@ import { useFilteredBooks } from "../../app/hooks/useFilteredBooks"
 import { useBookCovers } from "../../app/hooks/useBookCovers"
 import { useFavorites } from "../../app/context/FavoritesContext"
 
-function SearchLayout() { // TODO: The loading modal takes a while to appear
+function SearchLayout() {
   const location = useLocation()
   const navigate = useNavigate()
   const { favoriteBooks } = useFavorites()
@@ -20,6 +20,7 @@ function SearchLayout() { // TODO: The loading modal takes a while to appear
     searchTerm,
     books,
     isSearching,
+    errorMessage,
     setSearchTerm,
     handleSearch,
     handleKeyDown
@@ -31,7 +32,7 @@ function SearchLayout() { // TODO: The loading modal takes a while to appear
         state: nextState
       })
     }
-  })
+  }) // TODO: The loading modal takes a while to appear
 
   const { filteredBooks } = useFilteredBooks(books)
 
@@ -42,7 +43,9 @@ function SearchLayout() { // TODO: The loading modal takes a while to appear
 
   return (
     <>
-      {showFavoritesTitle && (<h1 className="text-3xl font-bold text-brand-black uppercase px-20 pt-12.5">Favorites</h1>)}
+      {showFavoritesTitle && (
+        <h1 className="text-3xl font-bold text-brand-black uppercase px-20 pt-12.5">Favorites</h1>
+      )}
 
       <SearchBar
         searchTerm={searchTerm}
@@ -57,7 +60,8 @@ function SearchLayout() { // TODO: The loading modal takes a while to appear
           filteredBooks,
           coversByBookWork,
           isSearching,
-          isLoadingCovers
+          isLoadingCovers,
+          errorMessage
         }}
       />
     </>

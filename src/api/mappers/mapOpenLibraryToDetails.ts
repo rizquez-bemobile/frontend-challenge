@@ -1,11 +1,14 @@
 import type { Details } from "../../domain/models/Details"
 import type { OpenLibraryWork } from "../contracts/OpenLibraryWork"
 
-export const mapOpenLibraryToDetails = (dto: OpenLibraryWork): Details => { // TODO: Improve the way text is filtered
-    const description =
-        (typeof dto.description === 'string'
-            ? dto.description
-            : dto.description?.value ?? 'No description was found for this book').split("----------")[0]
+export const mapOpenLibraryToDetails = (dto: OpenLibraryWork): Details => {
+    const raw = typeof dto.description === 'string' 
+        ? dto.description
+        : dto.description?.value ?? 'No description was found for this book'
+
+    const parts = raw.split("----------")
+
+    const description = parts[0]
 
     return {
         description,

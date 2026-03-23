@@ -7,7 +7,7 @@ export const openLibrarySearch = async (searchTerm: string): Promise<Book[]> => 
     const response = await fetch(`${OPEN_LIBRARY_BASE_URL}/search.json?q=${encodeURIComponent(searchTerm)}`)
 
     if (!response.ok) 
-        throw new Error('Error during the search') // TODO: Custom this error message
+        throw new Error('It was not possible to retrieve the books based on the search criteria entered')
 
     const data: OpenLibrarySearchResponse = await response.json()
 

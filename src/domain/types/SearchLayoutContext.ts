@@ -5,5 +5,6 @@ export type SearchLayoutContext = {
   filteredBooks: Book[]
   coversByBookWork: CoversByBookWork
   isSearching: boolean
-  isLoadingCovers: boolean
+  isLoadingCovers: boolean,
+  errorMessage: string
 }

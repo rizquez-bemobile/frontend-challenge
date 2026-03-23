@@ -40,7 +40,7 @@ Frontend-Challenge/
 │   │       ├── BookSummaryProps.ts
 │   │       ├── CoversByBookWork.ts
 │   │       ├── FavoritesContextBooks.ts
-│   │       ├── LoadingProps.ts
+│   │       ├── ModalProps.ts
 │   │       ├── SearchBarProps.ts
 │   │       ├── SearchLayoutContext.ts
 │   │       ├── SearchState.ts
@@ -53,7 +53,7 @@ Frontend-Challenge/
 │   │   │   ├── BooksFound.tsx
 │   │   │   ├── BooksSummary.tsx
 │   │   │   ├── Header.tsx
-│   │   │   ├── Loading.tsx
+│   │   │   ├── Modal.tsx
 │   │   │   └── SearchBar.tsx
 │   │   ├── layouts
 │   │   │   └── SearchLayout.tsx

@@ -1,14 +1,15 @@
 import { useEffect } from "react"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 import type { BookLocationState } from "../../domain/types/BookLocationState"
 import { BookSummary } from "../components/BookSummary"
 import { useDetailsSearch } from "../../app/hooks/useDetailsSearch"
-import { Loading } from "../components/Loading"
+import { Modal } from "../components/Modal"
 import type { Book } from "../../domain/models/Book"
 
-function BookDetailView() {
+function BookDetailView() { // TODO: Add more details
     const location = useLocation()
+    const navigate = useNavigate()
     const state = (location.state as BookLocationState | null) ?? null
 
     const book = state?.book as Book
@@ -17,6 +18,7 @@ function BookDetailView() {
     const {
         details,
         isSearchingDetails,
+        errorMessage,
         handleSearchDetails
     } = useDetailsSearch(book.work)
 
@@ -27,9 +29,13 @@ function BookDetailView() {
         handleSearchDetails()
     }, [book.work])
 
-    return isSearchingDetails ? (
-        <Loading />
-    ) : (
+    if (isSearchingDetails)
+        return <Modal />
+
+    if (errorMessage)
+        return <Modal category="error" onClose={() => navigate(-1)} text={errorMessage} />
+
+    return (
         <BookSummary
             book={book}
             coverUrl={coverUrl}

@@ -5,10 +5,11 @@ import type { Book } from "../../domain/models/Book"
 import type { UseBookSearchOptions } from "../../domain/types/UseBookSearchOptions"
 import { useFavorites } from "../context/FavoritesContext"
 
-export const useBookSearch = ({ initialSearchState = null, persistSearchState }: UseBookSearchOptions = {}) => { // TODO: It is necessary to handle errors
+export const useBookSearch = ({ initialSearchState = null, persistSearchState }: UseBookSearchOptions = {}) => {
     const [searchTerm, setSearchTerm] = useState(() => initialSearchState?.searchTerm ?? '')
     const [books, setBooks] = useState<Book[]>(() => initialSearchState?.books ?? [])
     const [isSearching, setIsSearching] = useState(false)
+    const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const { clearFavorites } = useFavorites()
 
     const lastSearchedTerm = useRef(initialSearchState?.searchTerm ?? '')
@@ -20,6 +21,7 @@ export const useBookSearch = ({ initialSearchState = null, persistSearchState }:
             setBooks([])
             lastSearchedTerm.current = ''
             clearFavorites()
+            setErrorMessage(null)
 
             persistSearchState?.({
                 searchTerm: '',
@@ -33,6 +35,7 @@ export const useBookSearch = ({ initialSearchState = null, persistSearchState }:
             return
 
         setIsSearching(true)
+        setErrorMessage(null)
 
         try {
             const response = await openLibrarySearch(trimmedSearchTerm)
@@ -46,7 +49,11 @@ export const useBookSearch = ({ initialSearchState = null, persistSearchState }:
                 books: nextBooks
             })
         } catch (error) {
-            console.log(error)
+            if (error instanceof Error)
+                setErrorMessage(error.message)
+            else
+                setErrorMessage("Unknown error")
+
             setBooks([])
 
             persistSearchState?.({
@@ -68,6 +75,7 @@ export const useBookSearch = ({ initialSearchState = null, persistSearchState }:
         searchTerm,
         books,
         isSearching,
+        errorMessage,
         setSearchTerm,
         handleSearch,
         handleKeyDown

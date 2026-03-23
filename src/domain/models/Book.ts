@@ -1,4 +1,4 @@
-export interface Book { // TODO: Parameters cannot be undefined!
+export interface Book {
   work: string
   title?: string
   authors?: string[]

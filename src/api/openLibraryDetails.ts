@@ -7,7 +7,7 @@ export const openLibraryDetails = async (work: string): Promise<Details> => {
     const response = await fetch(`${OPEN_LIBRARY_BASE_URL}${work}.json`)
 
     if (!response.ok) 
-        throw new Error('Error during the search') // TODO: Custom this error message
+        throw new Error('At this time, it is not possible to obtain information about the book')
 
     const data: OpenLibraryWork = await response.json()
     

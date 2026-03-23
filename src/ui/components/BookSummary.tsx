@@ -29,7 +29,7 @@ export const BookSummary = ({ book, coverUrl, details }: BookSummaryProps) => {
                             {details?.description}
                         </p>
                         <p className="text-brand-white text-base">
-                            <span className="font-bold">First publish date:</span> {details?.firstPublishDate}
+                            <span className="font-semibold">OpenLibrary publication history</span>: {details?.firstPublishDate}
                         </p>
                     </div>
                 </section>
