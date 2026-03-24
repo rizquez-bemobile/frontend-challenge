@@ -7,7 +7,7 @@ import { useDetailsSearch } from "../../app/hooks/useDetailsSearch"
 import { Modal } from "../components/Modal"
 import type { Book } from "../../domain/models/Book"
 
-function BookDetailView() { // TODO: Add more details
+function BookDetailView() {
     const location = useLocation()
     const navigate = useNavigate()
     const state = (location.state as BookLocationState | null) ?? null
@@ -18,6 +18,7 @@ function BookDetailView() { // TODO: Add more details
     const {
         details,
         errorMessage,
+        isSearchingDetails,
         handleSearchDetails
     } = useDetailsSearch(book.work)
 
@@ -27,6 +28,9 @@ function BookDetailView() { // TODO: Add more details
         
         handleSearchDetails()
     }, [book.work])
+
+    if (isSearchingDetails)
+        return <Modal />
 
     if (errorMessage)
         return <Modal category="error" onClose={() => navigate(-1)} text={errorMessage} />

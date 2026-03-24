@@ -18,7 +18,7 @@ function App() {
           <Route path="/book/results" element={<BookResultsView />} />
           <Route path="/book/favorites" element={<FavoriteBooksView />} />
         </Route>
-        <Route path="/book/:title" element={<BookDetailView />} />
+        <Route path="/book/details" element={<BookDetailView />} />
       </Routes>
     </FavoritesProvider>
   )

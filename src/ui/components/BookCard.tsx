@@ -7,14 +7,13 @@ import { useFavorites } from "../../app/context/FavoritesContext"
 import type { BookCardProps } from "../../domain/types/BookCardProps"
 
 export const BookCard = ({ book, coverUrl }: BookCardProps) => {
-    const authors = book.authors?.join(', ')
     const { toggleFavorite, isFavorite } = useFavorites()
     const favorite = isFavorite(book.work)
 
     return (
         <article className="group flex flex-col justify-between overflow-hidden bg-brand-black [clip-path:polygon(0_0,100%_0,100%_95%,90%_100%,0_100%)]">
             <Link 
-                to={`/book/${book.title}`}
+                to={`/book/details`}
                 state={{
                     book,
                     coverUrl
@@ -49,10 +48,10 @@ export const BookCard = ({ book, coverUrl }: BookCardProps) => {
                 
                 <div className="relative z-10 flex min-w-0 flex-1 flex-col gap-2.5">
                     <p className="truncate text-sm font-normal text-brand-white">
-                        Published in {book.firstPublishedYear}
+                        {book.title}
                     </p>
                     <p className="truncate text-sm font-normal text-brand-white">
-                        Authors: {authors}
+                        Authors: {book.authors}
                     </p>
                 </div>
 

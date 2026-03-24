@@ -1,4 +1,5 @@
 import type { Details } from "../../domain/models/Details"
+import { removeHyphensDoubleQuotes } from "../../shared/helpers/formatters"
 import type { OpenLibraryWork } from "../contracts/OpenLibraryWork"
 
 export const mapOpenLibraryToDetails = (dto: OpenLibraryWork): Details => {
@@ -8,10 +9,8 @@ export const mapOpenLibraryToDetails = (dto: OpenLibraryWork): Details => {
 
     const parts = raw.split("----------")
 
-    const description = parts[0]
-
     return {
-        description,
-        firstPublishDate: dto.first_publish_date ?? 'No publication date available'
+        description: removeHyphensDoubleQuotes(parts[0]),
+        firstPublishDate: dto.first_publish_date ?? 'No publication history available'
     }
 }

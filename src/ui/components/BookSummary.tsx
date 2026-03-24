@@ -24,13 +24,21 @@ export const BookSummary = ({ book, coverUrl, details }: BookSummaryProps) => {
                             onClick={() => toggleFavorite(book)}
                         />
                     </div>
-                    <div className="flex flex-col gap-10">
+                    <div className="flex flex-col justify-between h-full">
                         <p className="text-brand-white text-base text-justify">
                             {details?.description}
                         </p>
-                        <p className="text-brand-white text-base">
-                            <span className="font-semibold">OpenLibrary publication history</span>: {details?.firstPublishDate}
-                        </p>
+                        <div className="pb-5">
+                            <p className="text-brand-white text-base">
+                                <span className="font-semibold">Authors:</span> {book.authors}
+                            </p>
+                            <p className="text-brand-white text-base pt-1">
+                                <span className="font-semibold">First published:</span> {book.firstPublishedYear}
+                            </p>
+                            <p className="text-brand-white text-base pt-1">
+                                <span className="font-semibold">Publication history:</span> {details?.firstPublishDate}
+                            </p>
+                        </div>
                     </div>
                 </section>
             </summary>
