@@ -19,7 +19,7 @@ export const BookSummary = ({ book, coverUrl, details }: BookSummaryProps) => {
                         <FontAwesomeIcon
                             icon={favorite ? solidHeart : regularHeart}
                             className={`shrink-0 cursor-pointer text-2xl transition-colors duration-200 self-center ${
-                                favorite ? 'text-brand-red' : 'text-brand-white'
+                                favorite ? "text-brand-red" : "text-brand-white"
                             }`}
                             onClick={() => toggleFavorite(book)}
                         />

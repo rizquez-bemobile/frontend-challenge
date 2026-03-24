@@ -27,7 +27,7 @@ export const useBookCovers = (books: Book[]) => {
                     const coverUrl = openLibraryCoverUrl(book.coverId)
 
                     if (!coverUrl) {
-                        nextCovers[book.work] = ''
+                        nextCovers[book.work] = ""
                         resolve()
                         return
                     }
@@ -40,7 +40,7 @@ export const useBookCovers = (books: Book[]) => {
                     }
 
                     image.onerror = () => {
-                        nextCovers[book.work] = ''
+                        nextCovers[book.work] = ""
                         resolve()
                     }
 

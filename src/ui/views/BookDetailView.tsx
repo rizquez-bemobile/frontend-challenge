@@ -36,11 +36,13 @@ function BookDetailView() {
         return <Modal category="error" onClose={() => navigate(-1)} text={errorMessage} />
 
     return (
-        <BookSummary
-            book={book}
-            coverUrl={coverUrl}
-            details={details}
-        />
+        <>
+            <BookSummary
+                book={book}
+                coverUrl={coverUrl}
+                details={details}
+            />
+        </>
     )
 }
 

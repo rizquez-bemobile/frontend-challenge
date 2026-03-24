@@ -8,7 +8,7 @@ export const useFilteredBooks = (books: Book[]) => {
             const hasCoverEditionKey = Boolean(book.coverEditionKey?.trim())
             const hasLendingEdition = Boolean(book.lendingEdition?.trim())
 
-            return hasCoverEditionKey && hasLendingEdition
+            return hasCoverEditionKey || hasLendingEdition
         })
     }, [books])
 

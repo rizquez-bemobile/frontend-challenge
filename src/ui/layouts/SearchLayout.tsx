@@ -28,7 +28,7 @@ function SearchLayout() {
   } = useBookSearch({
     initialSearchState: savedSearchState,
     persistSearchState: (nextState) => {
-      navigate('/book/results', {
+      navigate("/book/results", {
         replace: true,
         state: nextState
       })

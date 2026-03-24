@@ -1,11 +1,11 @@
 import type { Book } from "../../domain/models/Book"
 import type { OpenLibraryBook } from "../contracts/OpenLibraryBook"
 
-export const mapOpenLibraryToBook = (dto: OpenLibraryBook): Book => {
+export const mapBookToBook = (dto: OpenLibraryBook): Book => {
   return {
     work: dto.key,
     title: dto.title,
-    authors: dto.author_name?.join(', '),
+    authors: dto.author_name?.join(", "),
     firstPublishedYear: dto.first_publish_year,
     coverId: dto.cover_i,
     coverEditionKey: dto.cover_edition_key,

@@ -6,25 +6,25 @@ import type { UseBookSearchOptions } from "../../domain/types/UseBookSearchOptio
 import { useFavorites } from "../context/FavoritesContext"
 
 export const useBookSearch = ({ initialSearchState = null, persistSearchState }: UseBookSearchOptions = {}) => {
-    const [searchTerm, setSearchTerm] = useState(() => initialSearchState?.searchTerm ?? '')
+    const [searchTerm, setSearchTerm] = useState(() => initialSearchState?.searchTerm ?? "")
     const [books, setBooks] = useState<Book[]>(() => initialSearchState?.books ?? [])
     const [isSearching, setIsSearching] = useState(false)
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const { clearFavorites } = useFavorites()
 
-    const lastSearchedTerm = useRef(initialSearchState?.searchTerm ?? '')
+    const lastSearchedTerm = useRef(initialSearchState?.searchTerm ?? "")
 
     const handleSearch = async () => {
         const trimmedSearchTerm = searchTerm.trim()
 
         if (!trimmedSearchTerm) {
             setBooks([])
-            lastSearchedTerm.current = ''
+            lastSearchedTerm.current = ""
             clearFavorites()
             setErrorMessage(null)
 
             persistSearchState?.({
-                searchTerm: '',
+                searchTerm: "",
                 books: []
             })
 
@@ -67,7 +67,7 @@ export const useBookSearch = ({ initialSearchState = null, persistSearchState }:
     }
 
     const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter')
+        if (event.key === "Enter")
             handleSearch()
     }
 

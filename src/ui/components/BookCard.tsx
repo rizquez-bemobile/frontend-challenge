@@ -58,7 +58,7 @@ export const BookCard = ({ book, coverUrl }: BookCardProps) => {
                 <FontAwesomeIcon
                     icon={favorite ? solidHeart : regularHeart}
                     className={`relative z-10 shrink-0 cursor-pointer text-base ${
-                        favorite ? 'text-brand-red group-hover:text-brand-white transition-colors duration-500' : 'text-brand-white'
+                        favorite ? "text-brand-red group-hover:text-brand-white transition-colors duration-500" : "text-brand-white"
                     }`}
                     onClick={() => toggleFavorite(book)}
                 />
