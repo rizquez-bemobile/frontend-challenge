@@ -6,14 +6,10 @@ import lookingforabook from "@/assets/looking-for-a-book.jpg"
 import type { SearchLayoutContext } from "../../domain/types/SearchLayoutContext"
 
 function BookResultsView() {
-  const { filteredBooks, coversByBookWork, isSearching, isLoadingCovers, errorMessage } = useOutletContext<SearchLayoutContext>()
+  const { filteredBooks, coversByBookWork, errorMessage } = useOutletContext<SearchLayoutContext>()
   const navigate = useNavigate()
 
-  const isLoading = isSearching || isLoadingCovers
   const hasBooks = filteredBooks.length > 0
-
-  if (isLoading)
-    return <Modal />
 
   if (errorMessage)
     return <Modal category="error" onClose={() => navigate(-1)} text={errorMessage} />

@@ -17,7 +17,6 @@ function BookDetailView() { // TODO: Add more details
 
     const {
         details,
-        isSearchingDetails,
         errorMessage,
         handleSearchDetails
     } = useDetailsSearch(book.work)
@@ -28,9 +27,6 @@ function BookDetailView() { // TODO: Add more details
         
         handleSearchDetails()
     }, [book.work])
-
-    if (isSearchingDetails)
-        return <Modal />
 
     if (errorMessage)
         return <Modal category="error" onClose={() => navigate(-1)} text={errorMessage} />

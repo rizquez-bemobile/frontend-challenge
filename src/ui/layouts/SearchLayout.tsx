@@ -6,6 +6,7 @@ import type { SearchState } from "../../domain/types/SearchState"
 import { useFilteredBooks } from "../../app/hooks/useFilteredBooks"
 import { useBookCovers } from "../../app/hooks/useBookCovers"
 import { useFavorites } from "../../app/context/FavoritesContext"
+import { Modal } from "../components/Modal"
 
 function SearchLayout() {
   const location = useLocation()
@@ -32,7 +33,7 @@ function SearchLayout() {
         state: nextState
       })
     }
-  }) // TODO: The loading modal takes a while to appear
+  })
 
   const { filteredBooks } = useFilteredBooks(books)
 
@@ -41,8 +42,15 @@ function SearchLayout() {
     isLoadingCovers
   } = useBookCovers(filteredBooks)
 
+  const isLoading = isSearching || isLoadingCovers
+
   return (
     <>
+      {isLoading && (
+        <Modal />
+      )}
+      
+
       {showFavoritesTitle && (
         <h1 className="text-3xl font-bold text-brand-black uppercase px-20 pt-12.5">Favorites</h1>
       )}
@@ -57,7 +65,7 @@ function SearchLayout() {
 
       <Outlet
         context={{
-          filteredBooks,
+          filteredBooks: isLoading ? [] : filteredBooks,
           coversByBookWork,
           isSearching,
           isLoadingCovers,
