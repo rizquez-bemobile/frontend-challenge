@@ -3,7 +3,16 @@ import { useNavigate, useOutletContext } from "react-router-dom"
 import { Modal } from "../components/Modal"
 import { BooksFound } from "../components/BooksFound"
 import lookingforabook from "@/assets/looking-for-a-book.jpg"
-import type { SearchLayoutContext } from "../../domain/types/SearchLayoutContext"
+import type { Book } from "../../domain/models/Book"
+import type { CoversByBookWork } from "../../domain/types/CoversByBookWork"
+
+type SearchLayoutContext = {
+  filteredBooks: Book[]
+  coversByBookWork: CoversByBookWork
+  isSearching: boolean
+  isLoadingCovers: boolean,
+  errorMessage: string
+}
 
 function BookResultsView() {
   const { filteredBooks, coversByBookWork, errorMessage } = useOutletContext<SearchLayoutContext>()

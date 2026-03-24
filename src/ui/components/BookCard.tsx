@@ -4,7 +4,12 @@ import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons"
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons"
 
 import { useFavorites } from "../../app/context/FavoritesContext"
-import type { BookCardProps } from "../../domain/types/BookCardProps"
+import type { Book } from "../../domain/models/Book"
+
+type BookCardProps = {
+    book: Book
+    coverUrl?: string
+}
 
 export const BookCard = ({ book, coverUrl }: BookCardProps) => {
     const { toggleFavorite, isFavorite } = useFavorites()

@@ -1,7 +1,13 @@
 import { useLayoutEffect } from "react"
 
-import type { BooksFoundProps } from "../../domain/types/BooksFoundProps"
 import { BookCard } from "./BookCard"
+import type { Book } from "../../domain/models/Book"
+
+type BooksFoundProps = {
+    books: Book[]
+    coversByBookWork: Record<string, string>
+    onRendered?: () => void
+}
 
 export const BooksFound = ({ books, coversByBookWork, onRendered }: BooksFoundProps) => {
     useLayoutEffect(() => {

@@ -1,7 +1,14 @@
 import { createContext, useContext, useMemo, useState } from "react"
 
-import type { FavoritesContextBooks } from "../../domain/types/FavoritesContextBooks"
 import type { Book } from "../../domain/models/Book"
+
+type FavoritesContextBooks = {
+    favorites: Map<string, Book>
+    favoriteBooks: Book[]
+    toggleFavorite: (book: Book) => void
+    isFavorite: (bookWork: string) => boolean
+    clearFavorites: () => void
+}
 
 const FavoritesContext = createContext<FavoritesContextBooks | null>(null)
 

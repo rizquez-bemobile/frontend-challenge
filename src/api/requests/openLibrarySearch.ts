@@ -1,7 +1,7 @@
-import type { Book } from "../domain/models/Book"
-import type { OpenLibrarySearchResponse } from "./contracts/OpenLibrarySearchResponse"
-import { OPEN_LIBRARY_BASE_URL } from "../shared/constants"
-import { mapBookToBook } from "./mappers/mapBookToBook"
+import type { Book } from "../../domain/models/Book"
+import type { OpenLibrarySearchResponse } from "../contracts/OpenLibrarySearchResponse"
+import { OPEN_LIBRARY_BASE_URL } from "../../shared/constants"
+import { mapBookToBook } from "../mappers/mapBookToBook"
 
 export const openLibrarySearch = async (searchTerm: string): Promise<Book[]> => {
     const response = await fetch(`${OPEN_LIBRARY_BASE_URL}/search.json?q=${encodeURIComponent(searchTerm)}`)

@@ -1,11 +1,15 @@
 import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 
-import type { BookLocationState } from "../../domain/types/BookLocationState"
 import { BookSummary } from "../components/BookSummary"
 import { useDetailsSearch } from "../../app/hooks/useDetailsSearch"
 import { Modal } from "../components/Modal"
 import type { Book } from "../../domain/models/Book"
+
+type BookLocationState = {
+    book: Book
+    coverUrl?: string
+}
 
 function BookDetailView() {
     const location = useLocation()

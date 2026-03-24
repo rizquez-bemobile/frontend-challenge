@@ -1,7 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
-import type { SearchBarProps } from "../../domain/types/SearchBarProps"
+type SearchBarProps = {
+    searchTerm: string
+    results: number
+    setSearchTerm: React.Dispatch<React.SetStateAction<string>>
+    handleSearch: () => Promise<void>
+    handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void
+}
 
 export const SearchBar = ({ searchTerm, results, setSearchTerm, handleSearch, handleKeyDown }: SearchBarProps) => {
     return (

@@ -1,8 +1,8 @@
 import { useLayoutEffect, useState } from "react"
 
 import type { CoversByBookWork } from "../../domain/types/CoversByBookWork"
-import { openLibraryCoverUrl } from "../../api/openLibraryCoverUrl"
 import type { Book } from "../../domain/models/Book"
+import { openLibraryCoverUrl } from "../../api/requests/openLibraryCoverUrl"
 
 export const useBookCovers = (books: Book[]) => {
     const [coversByBookWork, setCoversByBookWork] = useState<CoversByBookWork>({})

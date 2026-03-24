@@ -1,7 +1,7 @@
-import type { Details } from "../domain/models/Details"
-import { OPEN_LIBRARY_BASE_URL } from "../shared/constants"
-import type { OpenLibraryWork } from "./contracts/OpenLibraryWork"
-import { mapWorkToDetails } from "./mappers/mapWorkToDetails"
+import type { Details } from "../../domain/models/Details"
+import { OPEN_LIBRARY_BASE_URL } from "../../shared/constants"
+import type { OpenLibraryWork } from "../contracts/OpenLibraryWork"
+import { mapWorkToDetails } from "../mappers/mapWorkToDetails"
 
 export const openLibraryDetails = async (work: string): Promise<Details> => {
     const response = await fetch(`${OPEN_LIBRARY_BASE_URL}${work}.json`)

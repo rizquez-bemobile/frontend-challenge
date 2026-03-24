@@ -2,8 +2,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons"
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons"
 
-import type { BookSummaryProps } from "../../domain/types/BookSummaryProps"
 import { useFavorites } from "../../app/context/FavoritesContext"
+import type { Book } from "../../domain/models/Book"
+import type { Details } from "../../domain/models/Details"
+
+type BookSummaryProps = {
+    book: Book
+    coverUrl: string
+    details: Details | null
+}
 
 export const BookSummary = ({ book, coverUrl, details }: BookSummaryProps) => {
     const { toggleFavorite, isFavorite } = useFavorites()

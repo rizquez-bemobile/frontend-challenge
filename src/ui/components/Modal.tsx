@@ -1,5 +1,10 @@
-import type { ModalProps } from "../../domain/types/ModalProps"
 import { DEFAULT_LOADING_TEXT } from "../../shared/constants"
+
+type ModalProps = {
+    text?: string
+    category?: "loading" | "error"
+    onClose?: () => void
+}
 
 export const Modal = ({ text = DEFAULT_LOADING_TEXT, category = "loading", onClose }: ModalProps) => {
     return (

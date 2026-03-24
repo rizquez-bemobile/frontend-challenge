@@ -1,9 +1,14 @@
 import { useRef, useState } from "react"
 
-import { openLibrarySearch } from "../../api/openLibrarySearch"
+import { openLibrarySearch } from "../../api/requests/openLibrarySearch"
 import type { Book } from "../../domain/models/Book"
-import type { UseBookSearchOptions } from "../../domain/types/UseBookSearchOptions"
 import { useFavorites } from "../context/FavoritesContext"
+import type { SearchState } from "../../domain/types/SearchState"
+
+type UseBookSearchOptions = {
+    initialSearchState?: SearchState | null
+    persistSearchState?: (state: SearchState) => void
+}
 
 export const useBookSearch = ({ initialSearchState = null, persistSearchState }: UseBookSearchOptions = {}) => {
     const [searchTerm, setSearchTerm] = useState(() => initialSearchState?.searchTerm ?? "")

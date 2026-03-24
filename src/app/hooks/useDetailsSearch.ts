@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 import type { Details } from "../../domain/models/Details"
-import { openLibraryDetails } from "../../api/openLibraryDetails"
+import { openLibraryDetails } from "../../api/requests/openLibraryDetails"
 
 export const useDetailsSearch = (work: string) => {
     const [details, setDetails] = useState<Details | null>(null)
