@@ -11,6 +11,7 @@ export const mapWorkToDetails = (dto: OpenLibraryWork): Details => {
 
     return {
         description: description,
-        firstPublishDate: dto.first_publish_date ?? "No publication history available"
+        firstPublishDate: dto.first_publish_date ?? "No publication history available",
+        subjects: dto.subjects ?? []
     }
 }
