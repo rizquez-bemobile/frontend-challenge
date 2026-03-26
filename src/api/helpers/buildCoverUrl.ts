@@ -1,6 +1,6 @@
 import { OPEN_LIBRARY_COVER_BASE_URL } from "../../shared/constants"
 
-export const openLibraryCoverUrl = (coverId?: number, size: "S" | "M" | "L" = "L") => {
+export const buildCoverUrl = (coverId?: number, size: "S" | "M" | "L" = "L"): string => {
     if (!coverId)
         return ""
     

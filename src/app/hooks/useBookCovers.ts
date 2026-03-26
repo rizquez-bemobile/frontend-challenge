@@ -2,7 +2,7 @@ import { useLayoutEffect, useState } from "react"
 
 import type { CoversByBookWork } from "../../domain/types/CoversByBookWork"
 import type { Book } from "../../domain/models/Book"
-import { openLibraryCoverUrl } from "../../api/requests/openLibraryCoverUrl"
+import { buildCoverUrl } from "../../api/helpers/buildCoverUrl"
 
 export const useBookCovers = (books: Book[]) => {
     const [coversByBookWork, setCoversByBookWork] = useState<CoversByBookWork>({})
@@ -24,7 +24,7 @@ export const useBookCovers = (books: Book[]) => {
 
             const coverPromises = books.map((book) => {
                 return new Promise<void>((resolve) => {
-                    const coverUrl = openLibraryCoverUrl(book.coverId)
+                    const coverUrl = buildCoverUrl(book.coverId)
 
                     if (!coverUrl) {
                         nextCovers[book.work] = ""

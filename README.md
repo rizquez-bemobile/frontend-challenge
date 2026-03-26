@@ -61,19 +61,24 @@ Frontend-Challenge/
 │   │   ├── contracts
 │   │   │   ├── OpenLibraryBook.ts
 │   │   │   ├── OpenLibrarySearchResponse.ts
+│   │   │   ├── OpenLibrarySubject.ts
 │   │   │   └── OpenLibraryWork.ts
+│   │   ├── helpers
+│   │   │   └── buildCoverUrl.ts
 │   │   ├── mappers
 │   │   │   ├── mapBookToBook.ts
+│   │   │   ├── mapSubjectToBook.ts
 │   │   │   └── mapWorkToDetails.ts
 │   │   └── requests
-│   │       ├── openLibraryCoverUrl.ts
 │   │       ├── openLibraryDetails.ts
-│   │       └── openLibrarySearch.ts
+│   │       ├── openLibrarySearch.ts
+│   │       └── openLibrarySubjectsWork.ts
 │   ├── app
 │   │   ├── context
 │   │   │   └── FavoritesContext.tsx
 │   │   └── hooks
 │   │       ├── useBookCovers.ts
+│   │       ├── useBooksBySubjects.ts
 │   │       ├── useBookSearch.ts
 │   │       ├── useDetailsSearch.ts
 │   │       └── useFilteredBooks.ts
@@ -88,6 +93,8 @@ Frontend-Challenge/
 │   │       ├── CoversByBookWork.ts
 │   │       └── SearchState.ts
 │   ├── shared
+│   │   ├── helpers
+│   │   │   └── normalizeSubject.ts
 │   │   └── constants.ts
 │   ├── ui
 │   │   ├── components
@@ -144,5 +151,4 @@ npm run build
 
 - Bookmarks are not saved (only stored in memory)
 - Results are not paginated
-- The *Books on the same topic* section is under development
 - Direct dependency on an external API

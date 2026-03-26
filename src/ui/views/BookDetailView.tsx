@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react"
+import { useEffect, useLayoutEffect, useMemo, useState } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 
 import { BookSummary } from "../components/BookSummary"
@@ -6,6 +6,9 @@ import { useDetailsSearch } from "../../app/hooks/useDetailsSearch"
 import { Modal } from "../components/Modal"
 import type { Book } from "../../domain/models/Book"
 import { BooksSubject } from "../components/BooksSubject"
+import { useBooksBySubjects } from "../../app/hooks/useBooksBySubjects"
+import { useFilteredBooks } from "../../app/hooks/useFilteredBooks"
+import { useBookCovers } from "../../app/hooks/useBookCovers"
 
 type BookLocationState = {
   book: Book
@@ -20,6 +23,8 @@ function BookDetailView() {
   const book = state?.book as Book
   const coverUrl = state?.coverUrl as string
 
+  const [excludedWorks, setExcludedWorks] = useState<string[]>([])
+
   const {
     details,
     errorMessage,
@@ -29,31 +34,52 @@ function BookDetailView() {
 
   useEffect(() => {
     if (!book.work) 
-        return
+      return
       
     handleSearchDetails()
   }, [book.work])
 
+  useEffect(() => {
+    const storedBookKeys = localStorage.getItem("bookKeys")
 
-
-  // WIP
+    if (storedBookKeys)
+      setExcludedWorks(JSON.parse(storedBookKeys))
+  }, [])
 
   const subjects = useMemo(
     () => details?.subjects?.slice(0, 5) ?? [],
     [details?.subjects]
   )
 
-  console.log(subjects)
+  const {
+    books: subjectBooks,
+    isLoading: isLoadingSubjects,
+    errorMessageSubjects,
+    handleSubjectBooks
+  } = useBooksBySubjects({ subjects, excludedWorks })
 
-  // WIP
+  useLayoutEffect(() => {
+    if (subjects.length === 0) 
+      return
 
+    void handleSubjectBooks()
+  }, [subjects, excludedWorks])
+
+  const { filteredBooks } = useFilteredBooks(subjectBooks)
   
+    const {
+      coversByBookWork,
+      isLoadingCovers
+    } = useBookCovers(filteredBooks)
 
-  if (isSearchingDetails)
+  if (isSearchingDetails || isLoadingSubjects || isLoadingCovers)
     return <Modal />
 
   if (errorMessage)
     return <Modal category="error" onClose={() => navigate(-1)} text={errorMessage} />
+
+  if (errorMessageSubjects)
+    return <Modal category="error" onClose={() => navigate(-1)} text={errorMessageSubjects} />
 
   return (
     <>
@@ -63,7 +89,10 @@ function BookDetailView() {
         details={details}
       />
 
-      <BooksSubject />
+      <BooksSubject 
+        subjectBooks={subjectBooks}
+        coversByBookWork={coversByBookWork}
+      />
     </>
   )
 }

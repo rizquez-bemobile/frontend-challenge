@@ -16,7 +16,7 @@ export const BookCard = ({ book, coverUrl }: BookCardProps) => {
     const favorite = isFavorite(book.work)
 
     return (
-        <article className="group flex flex-col justify-between overflow-hidden bg-brand-black [clip-path:polygon(0_0,100%_0,100%_95%,90%_100%,0_100%)]">
+        <article className="group w-45 h-72 flex flex-col justify-between overflow-hidden bg-brand-black [clip-path:polygon(0_0,100%_0,100%_95%,90%_100%,0_100%)]">
             <Link 
                 to={`/book/details`}
                 state={{
@@ -24,7 +24,7 @@ export const BookCard = ({ book, coverUrl }: BookCardProps) => {
                     coverUrl
                 }}
             >
-                <div className="w-full overflow-hidden border-b-[5px] border-brand-red aspect-[1/1.35]">
+                <div className="w-full h-55 overflow-hidden border-b-[5px] border-brand-red">
                     {
                         coverUrl
                             ? (

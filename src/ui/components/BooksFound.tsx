@@ -11,6 +11,9 @@ type BooksFoundProps = {
 
 export const BooksFound = ({ books, coversByBookWork, onRendered }: BooksFoundProps) => {
     useLayoutEffect(() => {
+        const bookKeys = books.map(book => book.work)
+        localStorage.setItem("bookKeys", JSON.stringify(bookKeys))
+        
         onRendered?.()
     }, [books, coversByBookWork, onRendered])
 
